@@ -30,6 +30,9 @@ img {
 }
 .mobile-container {
     background-color: #fff;
+    box-shadow: 0 0 10px 2px #3333331a;
+    border-radius: 3px;
+    overflow: hidden;
     width:400px;
 }
 
@@ -49,5 +52,53 @@ header input {
 
 header button {
     background-color: transparent;
+    color: #aaa;
+    border: none;
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+.fav-container {
+    /* display: flex; */
+    background-color: rgb(243, 226, 255);
+    padding: 1rem;
+    text-align: center;
+}
+.fav-meals {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    list-style-type:none;
+    padding: 0;
+}
+
+.fav-meals li {
+    margin: 5px;
+    width:75px;
+}
+.fav-meals li img {
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 70px;
+    width: 70px;
+    box-shadow:0 0 10px 2px #3333331a;
+}
+
+.fav-meals li span {
+    font-size: 0.9rem;
+}
+.meal {
+    border-radius:3px;
+    box-shadow: 0 0 10px 2px #3333331a;
+    margin: 1rem;
+}
+
+.meal-header img {
+
+}
+
+.meal-body {
 
 }
