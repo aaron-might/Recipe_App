@@ -58,6 +58,9 @@ function addMeal(mealData, random = false) {
             addMealLS(mealData.idMeal)
             btn.classList.add('active');
         }
+        //clean the container
+favoriteContainer.innerHTML ="";
+        fetchFavMeals();
         // btn.classList.toggle('active');
     });
     meals.appendChild(meal)
@@ -71,26 +74,28 @@ function removeMealLS(mealId) {
     const mealIds = getMealsLS();
     localStorage.setItem('mealIds', JSON.stringify(mealIds.filter((id) => id !== mealId))
     );
-
+    
 }
 function getMealsLS() {
     const mealIds = JSON.parse(localStorage.getItem('mealIds'));
-
+    
     return mealIds === null ? [] : mealIds;
 }
 
 async function fetchFavMeals() {
-    const mealIds = getMealsLS();
+    favoriteContainer.innerHTML = "";
 
+    const mealIds = getMealsLS();
+    
     // const meals = [];
     for (let i = 0; i < mealIds.length; i++) {
         const mealId = mealIds[i];
         meal = await getMealById(mealId);
         addMealFav(meal);
     }
-
+    
     // console.log(meals);
-
+    
     //add them to the screen
 }
 
@@ -98,14 +103,22 @@ function addMealFav(mealData) {
     // console.log(mealData);
     const favMeal = document.createElement('li');
     // meal.classList.add('meal');
-
+    
     favMeal.innerHTML = `
-        <img 
-        src="${mealData.strMealThumb}" 
-        alt="${mealData.strMeal}"
-        /><span>${mealData.strMeal}</span>
-        `;
-
+    <img 
+    src="${mealData.strMealThumb}" 
+    alt="${mealData.strMeal}"
+    /><span>${mealData.strMeal}</span>
+    <button class ="clear">
+    <i class="fas fa-window-close"></i>
+    </button>
+    `;
+    const btn = favMeal.querySelector('.clear');
+    btn.addEventListener('click', () =>{
+        removeMealLS(mealData.idMeal);
+    fetchFavMeals();
+    })
+    
     favoriteContainer.appendChild(favMeal)
 }
 
