@@ -1,6 +1,6 @@
 const meals = document.getElementById('meals');
 getRandomMeal();
-
+fetchFavMeals();
 // write a  function that get random meal;
 
 async function getRandomMeal() {
@@ -15,8 +15,11 @@ async function getRandomMeal() {
 // write a function that get meal by id 
 async function getMealById(id) {
 
-    const meal = await fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id
+    const resp = await fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id
     );
+    const respData = await resp.json();
+    const meal = respData.meals[0];
+    return meal;
 }
 //write a function that get search meal by search
 async function getMealsBySearch(term) {
@@ -26,6 +29,7 @@ async function getMealsBySearch(term) {
 }
 
 function addMeal(mealData, random = false) {
+    // console.log(mealData);
     const meal = document.createElement('div');
     meal.classList.add('meal');
 
@@ -38,11 +42,53 @@ function addMeal(mealData, random = false) {
                 </div>
                 <div class="meal-body">
                     <h4>${mealData.strMeal}</h4>
-                    <button class="fav-btn active" >
+                    <button class="fav-btn active" onclick= "" >
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
         `;
-        meals.appendChild(meal)
+    const btn = meal.querySelector('.meal-body .fav-btn');
+    btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) {
+            removeMealLS(mealData.idMeal)
+            btn.classList.remove('active');
+        } else {
+            addMealLS(mealData.idMeal)
+            btn.classList.add('active');
+        }
+        // btn.classList.toggle('active');
+    });
+    meals.appendChild(meal)
+}
 
+function addMealLS(mealId) {
+    const mealIds = getMealsLS();
+    localStorage.setItem('mealIds', JSON.stringify([...mealIds, mealId]));
+}
+function removeMealLS(mealId) {
+    const mealIds = getMealsLS();
+    localStorage.setItem('mealIds', JSON.stringify(mealIds.filter((id) => id !== mealId))
+    );
+
+}
+function getMealsLS() {
+    const mealIds = JSON.parse(localStorage.getItem('mealIds'));
+
+    return mealIds === null ? [] : mealIds;
+}
+
+async function fetchFavMeals() {
+
+    const mealIds = getMealsLS();
+
+    const meals = [];
+    for (let i =0; i<mealIds.length; i ++) {
+        const mealId = mealIds[i];
+      meal = await getMealById(mealId)
+      meals.push(meal);
     }
+
+    console.log(meals);
+
+    //add them to the screen
+}
