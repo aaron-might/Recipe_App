@@ -1,14 +1,48 @@
-// write a function that get random meal
-function getRandomMeal(){
-fetch('www.themealdb.com/api/json/v1/1/random.php');
+const meals = document.getElementById('meals');
+getRandomMeal();
 
+// write a  function that get random meal;
 
+async function getRandomMeal() {
+    const resp = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+
+    const respData = await resp.json();
+    const randomMeal = respData.meals[0];
+
+    // console.log(RandomMeal);
+    addMeal(randomMeal, true);
 }
 // write a function that get meal by id 
-function getMealById(id){
+async function getMealById(id) {
 
-fetch('www.themealdb.com/api/json/v1/1/lookup.php?i='+id);
+    const meal = await fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id
+    );
 }
 //write a function that get search meal by search
-function getMealsBySearch(term)
-fetch('www.themealdb.com/api/json/v1/1/search.php?s='+term)
+async function getMealsBySearch(term) {
+
+    const meals = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' + term
+    );
+}
+
+function addMeal(mealData, random = false) {
+    const meal = document.createElement('div');
+    meal.classList.add('meal');
+
+    meal.innerHTML = `
+                <div class="meal-header">
+                ${random ? `
+                <span class="random"> Random Recipe </span>` : ''}
+                    <img src="${mealData.strMealThumb}" 
+                    alt="${mealData.strMeal}"
+                </div>
+                <div class="meal-body">
+                    <h4>${mealData.strMeal}</h4>
+                    <button class="fav-btn active" >
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+        `;
+        meals.appendChild(meal)
+
+    }
