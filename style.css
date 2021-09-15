@@ -75,6 +75,7 @@ header button {
 }
 
 .fav-meals li {
+    cursor: pointer;
     position: relative;
     margin: 5px;
     width:75px;
@@ -123,8 +124,9 @@ header button {
 .meal {
     border-radius:3px;
     box-shadow: 0 0 10px 2px #3333331a;
-    margin: 1.5rem;
     cursor: pointer;
+    margin: 1.5rem;
+    overflow:hidden;
 }
 
 .meal-header {
@@ -188,6 +190,8 @@ header button {
     background-color: #fff;
     border-radius: 5px;
     padding:0 2rem;
+    max-height: 100vh;
+    overflow: auto;
     max-width:600px;
     position: relative;
     width: 100%;

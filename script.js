@@ -124,45 +124,68 @@ function addMealFav(mealData) {
     // console.log(mealData);
     const favMeal = document.createElement('li');
     // meal.classList.add('meal');
+   
 
     favMeal.innerHTML = `
     <img 
-    src="${mealData.strMealThumb}" 
-    alt="${mealData.strMeal}"
+        src="${mealData.strMealThumb}" 
+        alt="${mealData.strMeal}"
     /><span>${mealData.strMeal}</span>
     <button class ="clear">
     <i class="fas fa-window-close"></i>
     </button>
     `;
+
     const btn = favMeal.querySelector('.clear');
     btn.addEventListener('click', () => {
         removeMealLS(mealData.idMeal);
+       
         fetchFavMeals();
-    })
+    });
+
+    favMeal.addEventListener('click', () =>{
+        showMealInfo(mealData);
+    });
 
     favoriteContainer.appendChild(favMeal)
 }
 
 function showMealInfo(mealData) {
 // //    clean it up
-// mealInfoEl.innerHTML ='';
+mealInfoEl.innerHTML ='';
    
 //     //update the Meal info
 const mealEl = document.createElement('div');
-// mealEl.innerHTML =`
-//     <h1>${mealData.strMeal}</h1>
-//     <img 
-//         src="${mealData.strMealThumb}" 
-//         alt=""
-//     />
+const ingredients=[];
 
-//     <p>${mealData.strInstructions}</p>
-// `
+// get ingredients and measure
+for (let i = 1; i<=20; i++){
+    if (mealData['strIngredient'+ i]){
+ingredients.push(`${mealData ['strIngredient'+ i]} -
+${mealData ['strMeasure'+ i]}`)    
+} else {
+        break;
+    }
+}
+
+mealEl.innerHTML = `
+    <h1>${mealData.strMeal}</h1>
+    <img 
+        src="${mealData.strMealThumb}" 
+        alt="${mealData.strMeal}"
+    />
+     <p>${mealData.strInstructions}</p>
+     <h3>Ingredients:</h3>
+     <ul>
+    ${ingredients.map(ing => `
+    <li>${ing}</li>`).join('')}
+     </ul>
+ `
 mealInfoEl.appendChild(mealEl);
 // //show the popup
 mealPopup.classList.remove('hidden');
     
-// }
+ }
 
 searchBtn.addEventListener('click', async () => {
     //clean container
