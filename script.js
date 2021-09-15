@@ -1,10 +1,10 @@
 const mealsEl = document.getElementById('meals');
 const favoriteContainer = document.getElementById('fav-meals');
 
-// const mealPopup = document.getElementById('meal-popup')
-// const popupCloseBtn = document.getElementById('close-popup')
+const mealPopup = document.getElementById('meal-popup')
+const popupCloseBtn = document.getElementById('close-popup')
 
-// const mealInfo = document.getElementById('meal-info')
+const mealInfoEl = document.getElementById('meal-info')
 
 
 const searchTerm = document.getElementById('search-term');
@@ -143,12 +143,12 @@ function addMealFav(mealData) {
     favoriteContainer.appendChild(favMeal)
 }
 
-// function showMealInfo(mealData) {
+function showMealInfo(mealData) {
 // //    clean it up
 // mealInfoEl.innerHTML ='';
    
 //     //update the Meal info
-// const mealEl = document.createElement('div');
+const mealEl = document.createElement('div');
 // mealEl.innerHTML =`
 //     <h1>${mealData.strMeal}</h1>
 //     <img 
@@ -158,9 +158,9 @@ function addMealFav(mealData) {
 
 //     <p>${mealData.strInstructions}</p>
 // `
-// mealInfoEl.appendChild(mealEl);
+mealInfoEl.appendChild(mealEl);
 // //show the popup
-// mealPopup.classList.remove('hidden');
+mealPopup.classList.remove('hidden');
     
 // }
 
@@ -179,6 +179,6 @@ searchBtn.addEventListener('click', async () => {
     }
 });
 
-// popupCloseBtn.addEventListener('click', () =>{
-//     mealPopup.classList.add('hidden');
-// })
+popupCloseBtn.addEventListener('click', () =>{
+    mealPopup.classList.add('hidden');
+})

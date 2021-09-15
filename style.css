@@ -168,19 +168,23 @@ header button {
  color: rebeccapurple;    
 }
 
-.meal-info-container {
-   background-color: rgb(0, 0, 0, 0.5);
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   position:fixed;
-   left: 0;
-   right: 0;
-   top: 0;
-   bottom: 0;
+.popup-container {
+    background-color: rgb(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
-.meal-info {
+.popup-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.popup{
     background-color: #fff;
     border-radius: 5px;
     padding:0 2rem;
@@ -189,12 +193,12 @@ header button {
     width: 100%;
 }
 
-.meal-info h1 {
+.popup h1 {
     text-align: center;
 }
 
 
-.meal-info .close-popup {
+.popup .close-popup {
     background-color: transparent;
     font-size:1.5rem;
     cursor:pointer;
@@ -203,8 +207,3 @@ header button {
     top:1rem;
     right: 1rem;
 }    
-
-.popup-container.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
