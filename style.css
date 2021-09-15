@@ -158,8 +158,8 @@ header button {
 }
 
 .meal-body .fav-btn {
-    background-color:transparent;
     border: none;
+    background-color:transparent;
     color: rgb(197, 187, 187);
     cursor: pointer;
     font-size: 1.2rem;

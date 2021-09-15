@@ -59,7 +59,7 @@ function addMeal(mealData, random = false) {
                 </div>
                 <div class="meal-body">
                     <h4>${mealData.strMeal}</h4>
-                    <button class="fav-btn active" onclick= "" >
+                    <button class="fav-btn" >
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
@@ -73,18 +73,18 @@ function addMeal(mealData, random = false) {
             addMealLS(mealData.idMeal)
             btn.classList.add('active');
         }
-        //clean the container
-        favoriteContainer.innerHTML = "";
+
         fetchFavMeals();
+        //clean the container
+        // favoriteContainer.innerHTML = "";
         // btn.classList.toggle('active');
     });
 
     meal.addEventListener('click', () =>{
         showMealInfo(mealData);
-    })
+    });
 
-
-    mealsEl.appendChild(meal)
+    mealsEl.appendChild(meal);
 }
 
 function addMealLS(mealId) {
