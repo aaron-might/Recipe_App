@@ -1,5 +1,11 @@
-const meals = document.getElementById('meals');
+const mealsEl = document.getElementById('meals');
 const favoriteContainer = document.getElementById('fav-meals');
+
+// const mealPopup = document.getElementById('meal-popup')
+// const popupCloseBtn = document.getElementById('close-popup')
+
+// const mealInfo = document.getElementById('meal-info')
+
 
 const searchTerm = document.getElementById('search-term');
 const searchBtn = document.getElementById('search');
@@ -35,7 +41,7 @@ async function getMealsBySearch(term) {
     const respData = await resp.json();
     const meals = respData.meals; //
 
-    console.log(meals)
+    // console.log(meals)
     return meals;
 }
 
@@ -72,7 +78,13 @@ function addMeal(mealData, random = false) {
         fetchFavMeals();
         // btn.classList.toggle('active');
     });
-    meals.appendChild(meal)
+
+    meal.addEventListener('click', () =>{
+        showMealInfo(mealData);
+    })
+
+
+    mealsEl.appendChild(meal)
 }
 
 function addMealLS(mealId) {
@@ -131,9 +143,31 @@ function addMealFav(mealData) {
     favoriteContainer.appendChild(favMeal)
 }
 
-searchBtn.addEventListener('click', async () => {
-    const search = searchTerm.value;
+// function showMealInfo(mealData) {
+// //    clean it up
+// mealInfoEl.innerHTML ='';
+   
+//     //update the Meal info
+// const mealEl = document.createElement('div');
+// mealEl.innerHTML =`
+//     <h1>${mealData.strMeal}</h1>
+//     <img 
+//         src="${mealData.strMealThumb}" 
+//         alt=""
+//     />
 
+//     <p>${mealData.strInstructions}</p>
+// `
+// mealInfoEl.appendChild(mealEl);
+// //show the popup
+// mealPopup.classList.remove('hidden');
+    
+// }
+
+searchBtn.addEventListener('click', async () => {
+    //clean container
+    mealsEl.innerHTML = '';
+    const search = searchTerm.value;
     // console.log (await getMealsBySearch(search));
 
     const meals = await getMealsBySearch(search)
@@ -143,5 +177,8 @@ searchBtn.addEventListener('click', async () => {
             addMeal(meal);
         });
     }
+});
 
-})
+// popupCloseBtn.addEventListener('click', () =>{
+//     mealPopup.classList.add('hidden');
+// })
